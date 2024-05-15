@@ -1,0 +1,6 @@
+/mpc-frontend
+/mpc-backend
+/.idea/*
+!.idea/vcs.xml
+!.idea/inspectionProfiles
+!.idea/checkstyle-idea.xml
