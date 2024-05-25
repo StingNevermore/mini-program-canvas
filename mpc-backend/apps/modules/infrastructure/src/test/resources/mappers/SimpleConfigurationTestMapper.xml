@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nevermore.mpc.unitests.data.dao.SimpleConfigurationTestDAO">
+    <insert id="insert" useGeneratedKeys="true">
+        insert into simple_configuration_test (`value`)
+        values ('2')
+    </insert>
+
+    <select id="select" resultType="int">
+        select 1
+        from simple_configuration_test
+    </select>
+</mapper>

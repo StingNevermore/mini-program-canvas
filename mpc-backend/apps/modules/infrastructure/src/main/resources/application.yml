@@ -1,0 +1,9 @@
+mybatis-plus:
+  mapper-locations: classpath*:/mappers/**/*.xml
+  global-config:
+    banner: false
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mpc
+    username: root
+    password: 123456
