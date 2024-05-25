@@ -1,9 +1,10 @@
 /.idea/*
-!.idea/vcs.xml
 !.idea/inspectionProfiles
 !.idea/checkstyle-idea.xml
 !.idea/codeStyles
 !.idea/dictionaries
+!.idea/modules.xml
+!.idea/mini-program-canvas.iml
 
 node_modules
 .DS_Store
