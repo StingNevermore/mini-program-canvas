@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.24"
 kotlinx = "1.8.1"
-spring-boot = "3.1.6"
+spring-boot = "3.3.0"
 junit = "5.10.2"
 druid = "1.2.20"
 mybatis-plus = "3.5.6"
