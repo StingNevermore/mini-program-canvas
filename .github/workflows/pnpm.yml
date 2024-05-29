@@ -47,5 +47,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
-    - name: Install dependencies
-      run: cd mpc-frontend && pnpm install && pnpm build
+    - name: Install
+      run: cd mpc-frontend && pnpm install
+
+    - name: Build
+      run: cd mpc-frontend && pnpm install
