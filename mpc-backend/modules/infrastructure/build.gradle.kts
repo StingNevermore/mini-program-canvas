@@ -19,7 +19,11 @@ dependencies {
     implementation(libs.druid)
     implementation(libs.mybatisPlusStarter)
     implementation(libs.mybatisSpring)
+    implementation(libs.commonsIo)
 
     testImplementation(libs.mybatisPlusTestStarter)
     runtimeOnly(libs.h2)
+
+    implementation(libs.curatorRecipes)
+    testImplementation(libs.curatorTest)
 }
