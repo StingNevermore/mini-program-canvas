@@ -14,10 +14,9 @@ import java.util.List;
 
 /**
  * @author nevermore
- * @since
+ * @since 0.0.1
  */
 public class ZkTestingClusterTestsBase {
-    private static final List<File> files = new ArrayList<>();
     private static CuratorFramework curator;
     private static TestingCluster cluster;
 
@@ -34,7 +33,6 @@ public class ZkTestingClusterTestsBase {
             InstanceSpec spec = new InstanceSpec(tempDirectory,
                     -1, -1, -1, true, -1);
             specs.add(spec);
-            files.add(tempDirectory);
         }
 
         TestingCluster cluster = new TestingCluster(specs);

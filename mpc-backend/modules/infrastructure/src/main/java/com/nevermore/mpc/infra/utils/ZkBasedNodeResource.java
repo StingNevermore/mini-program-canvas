@@ -31,7 +31,7 @@ public class ZkBasedNodeResource<T> implements Closeable {
     private volatile boolean closed = false;
     private volatile boolean emptyLogged = false;
     private volatile boolean hasAddedListener = false;
-    private AtomicBoolean outdated = new AtomicBoolean(false);
+    private final AtomicBoolean outdated = new AtomicBoolean(false);
     private CuratorCache cache;
 
     private final String path;

@@ -1,6 +1,5 @@
 package com.nevermore.mpc.tests.utils;
 
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.nevermore.mpc.infra.utils.ZkBasedNodeResource;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
