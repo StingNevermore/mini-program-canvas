@@ -1,10 +1,9 @@
-/.idea/*
+.idea/*
 !.idea/inspectionProfiles
 !.idea/checkstyle-idea.xml
 !.idea/codeStyles
 !.idea/dictionaries
-!.idea/modules.xml
-!.idea/mini-program-canvas.iml
+**/*.iml
 
 node_modules
 .DS_Store
@@ -28,7 +27,6 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Editor directories and files
-.idea
 # .vscode
 *.suo
 *.ntvs*
@@ -39,3 +37,4 @@ pnpm-debug.log*
 
 .gradle
 build
+!/.idea/inspectionProfiles/Project_Default.xml
