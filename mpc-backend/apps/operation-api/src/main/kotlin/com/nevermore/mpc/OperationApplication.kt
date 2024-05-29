@@ -5,11 +5,11 @@ import org.springframework.boot.runApplication
 
 /**
  * @author nevermore
- * @since
+ * @since 0.0.1
  */
-const val excludePackage = "com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration"
+const val mybatisPlusAutoConfiguration = "com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration"
 
-@SpringBootApplication(excludeName = [excludePackage])
+@SpringBootApplication(excludeName = [mybatisPlusAutoConfiguration])
 class OperationApplication
 
 fun main(args: Array<String>) {
