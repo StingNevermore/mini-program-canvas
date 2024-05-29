@@ -16,18 +16,23 @@
 package com.nevermore.mpc.infra.configuration;
 
 
-import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.sql.DataSource;
-
+import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
+import com.baomidou.mybatisplus.autoconfigure.DdlApplicationRunner;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusLanguageDriverAutoConfiguration;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
+import com.baomidou.mybatisplus.autoconfigure.SpringBootVFS;
+import com.baomidou.mybatisplus.autoconfigure.SqlSessionFactoryBeanCustomizer;
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.handlers.AnnotationHandler;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.handlers.PostInitTableInfoHandler;
+import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
+import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.ddl.IDdl;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
@@ -77,23 +82,16 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
-import com.baomidou.mybatisplus.autoconfigure.DdlApplicationRunner;
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusLanguageDriverAutoConfiguration;
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
-import com.baomidou.mybatisplus.autoconfigure.SpringBootVFS;
-import com.baomidou.mybatisplus.autoconfigure.SqlSessionFactoryBeanCustomizer;
-import com.baomidou.mybatisplus.core.MybatisConfiguration;
-import com.baomidou.mybatisplus.core.config.GlobalConfig;
-import com.baomidou.mybatisplus.core.handlers.AnnotationHandler;
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.baomidou.mybatisplus.core.handlers.PostInitTableInfoHandler;
-import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
-import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
-import com.baomidou.mybatisplus.extension.ddl.IDdl;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import javax.sql.DataSource;
+import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * {@link EnableAutoConfiguration Auto-Configuration} for Mybatis. Contributes a
@@ -307,7 +305,7 @@ public class MybatisPlusFixAutoConfiguration implements InitializingBean {
      * similar to using Spring Data JPA repositories.
      */
     public static class AutoConfiguredMapperScannerRegistrar
-        implements BeanFactoryAware, EnvironmentAware, ImportBeanDefinitionRegistrar {
+            implements BeanFactoryAware, EnvironmentAware, ImportBeanDefinitionRegistrar {
 
         private BeanFactory beanFactory;
         private Environment environment;
@@ -333,7 +331,7 @@ public class MybatisPlusFixAutoConfiguration implements InitializingBean {
             builder.addPropertyValue("basePackage", StringUtils.collectionToCommaDelimitedString(packages));
             BeanWrapper beanWrapper = new BeanWrapperImpl(MapperScannerConfigurer.class);
             Set<String> propertyNames = Stream.of(beanWrapper.getPropertyDescriptors()).map(PropertyDescriptor::getName)
-                .collect(Collectors.toSet());
+                    .collect(Collectors.toSet());
             if (propertyNames.contains("lazyInitialization")) {
                 // Need to mybatis-spring 2.0.2+
                 builder.addPropertyValue("lazyInitialization", "${mybatis-plus.lazy-initialization:${mybatis.lazy-initialization:false}}");
@@ -351,12 +349,12 @@ public class MybatisPlusFixAutoConfiguration implements InitializingBean {
             if (injectSqlSession && this.beanFactory instanceof ListableBeanFactory) {
                 ListableBeanFactory listableBeanFactory = (ListableBeanFactory) this.beanFactory;
                 Optional<String> sqlSessionTemplateBeanName = Optional
-                    .ofNullable(getBeanNameForType(SqlSessionTemplate.class, listableBeanFactory));
+                        .ofNullable(getBeanNameForType(SqlSessionTemplate.class, listableBeanFactory));
                 Optional<String> sqlSessionFactoryBeanName = Optional
-                    .ofNullable(getBeanNameForType(SqlSessionFactory.class, listableBeanFactory));
+                        .ofNullable(getBeanNameForType(SqlSessionFactory.class, listableBeanFactory));
                 if (sqlSessionTemplateBeanName.isPresent() || !sqlSessionFactoryBeanName.isPresent()) {
                     builder.addPropertyValue("sqlSessionTemplateBeanName",
-                        sqlSessionTemplateBeanName.orElse("sqlSessionTemplate"));
+                            sqlSessionTemplateBeanName.orElse("sqlSessionTemplate"));
                 } else {
                     builder.addPropertyValue("sqlSessionFactoryBeanName", sqlSessionFactoryBeanName.get());
                 }
@@ -394,7 +392,7 @@ public class MybatisPlusFixAutoConfiguration implements InitializingBean {
         @Override
         public void afterPropertiesSet() {
             logger.debug(
-                "Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.");
+                    "Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.");
         }
     }
 
