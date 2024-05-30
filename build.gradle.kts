@@ -1,13 +1,14 @@
 plugins {
-    `lifecycle-base`
+    base
 }
 
 fun registerLifecycleTaskDependencies(taskName: String) {
     tasks.getByName(taskName) {
-        dependsOn(gradle.includedBuild("mpc-backend").task(":apps:operation-api:$taskName"))
-        dependsOn(gradle.includedBuild("mpc-backend").task(":apps:templates-engine-api:$taskName"))
+        dependsOn(gradle.includedBuild("mpc-backend").task(":$taskName"))
+        dependsOn(gradle.includedBuild("intellij-plugins").task(":$taskName"))
     }
 }
 
 registerLifecycleTaskDependencies("clean")
 registerLifecycleTaskDependencies("build")
+registerLifecycleTaskDependencies("assemble")

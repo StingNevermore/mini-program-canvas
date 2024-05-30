@@ -3,7 +3,7 @@ import com.nevermore.mpc.buildx.officialStarter
 
 plugins {
     id("java")
-    id("mpc-build.spring-boot-library")
+    id("mpc-build.spring-boot-base")
 }
 
 dependencies {

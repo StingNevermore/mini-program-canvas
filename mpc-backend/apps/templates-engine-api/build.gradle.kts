@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":modules:infrastructure"))
-    implementation(project(":modules:components"))
+    implementation(project(":infrastructure"))
+    implementation(project(":components"))
 
 }

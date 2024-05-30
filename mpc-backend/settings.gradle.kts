@@ -1,15 +1,15 @@
 @file:Suppress("UnstableApiUsage")
 
 rootProject.name = "mpc-backend"
-include("apps:operation-api")
-include("apps:templates-engine-api")
-include("modules:components")
-include("modules:infrastructure")
+include("operation-api")
+include("templates-engine-api")
+include("components")
+include("infrastructure")
 
-project(":modules:infrastructure").projectDir = file("modules/infrastructure")
-project(":modules:components").projectDir = file("modules/components")
-project(":apps:operation-api").projectDir = file("apps/operation-api")
-project(":apps:templates-engine-api").projectDir = file("apps/templates-engine-api")
+project(":infrastructure").projectDir = file("modules/infrastructure")
+project(":components").projectDir = file("modules/components")
+project(":operation-api").projectDir = file("apps/operation-api")
+project(":templates-engine-api").projectDir = file("apps/templates-engine-api")
 
 pluginManagement {
     repositories {

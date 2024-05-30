@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="OperationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-    <module name="mpc-backend.apps.operation-api.main" />
+    <module name="mpc-backend.operation-api.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.nevermore.mpc.OperationApplication" />
     <extension name="coverage">
       <pattern>
