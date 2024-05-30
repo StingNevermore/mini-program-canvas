@@ -39,15 +39,4 @@ tasks {
     processResources {
         expand("activeProfile" to (profile ?: "dev"))
     }
-
-    disable(bootJar, bootRun, bootBuildImage, bootTestRun)
-    enable(jar)
-}
-
-fun disable(vararg tasks: TaskProvider<out Task>) {
-    tasks.forEach { it.get().enabled = false }
-}
-
-fun enable(vararg tasks: TaskProvider<out Task>) {
-    tasks.forEach { it.get().enabled = true }
 }
