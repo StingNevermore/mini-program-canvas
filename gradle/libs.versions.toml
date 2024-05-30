@@ -13,6 +13,13 @@ guava = "33.1.0-jre"
 jackson = "2.16.2"
 curator = "5.6.0"
 commonsIo = "2.16.1"
+# libraries
+annotations = "24.1.0"
+# plugins
+changelog = "2.2.0"
+gradleIntelliJPlugin = "1.17.2"
+qodana = "2023.3.1"
+kover = "0.7.6"
 
 [libraries]
 springBootDependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
@@ -38,9 +45,9 @@ jacksonModuleParameterNames = { group = "com.fasterxml.jackson.module", name = "
 jacksonModuleKotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
 
 curatorRecipes = { group = "org.apache.curator", name = "curator-recipes", version.ref = "curator" }
-curatorTest = {group = "org.apache.curator", name = "curator-test", version.ref = "curator"}
+curatorTest = { group = "org.apache.curator", name = "curator-test", version.ref = "curator" }
 
-commonsIo = {group="commons-io", name="commons-io", version.ref="commonsIo"}
+commonsIo = { group = "commons-io", name = "commons-io", version.ref = "commonsIo" }
 
 junitJupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 junitPlatformLauncher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatformLauncher" }
@@ -50,4 +57,11 @@ kotlinGradlePlugin = { group = "org.jetbrains.kotlin.jvm", name = "org.jetbrains
 kotlinSpringPlugin = { group = "org.jetbrains.kotlin.plugin.spring", name = "org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
 springBootPlugin = { group = "org.springframework.boot", name = "org.springframework.boot.gradle.plugin", version.ref = "spring-boot" }
 
+annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
+
 [plugins]
+changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
+gradleIntelliJPlugin = { id = "org.jetbrains.intellij", version.ref = "gradleIntelliJPlugin" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
