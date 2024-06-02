@@ -3,6 +3,7 @@
 !.idea/checkstyle-idea.xml
 !.idea/codeStyles
 !.idea/dictionaries
+!.idea/dataSources.xml
 **/*.iml
 
 node_modules

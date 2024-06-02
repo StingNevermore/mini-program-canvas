@@ -1,0 +1,41 @@
+name: local-dev-env
+services:
+  db:
+    image: mariadb:latest
+    container_name: mpc-mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../mysql.conf.d:/etc/mysql/conf.d/
+    environment:
+      - MARIADB_ROOT_PASSWORD=123456
+    healthcheck:
+      interval: 30s
+      retries: 3
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      timeout: 30s
+    restart: always
+    networks:
+      - mpc
+  init-db:
+    image: mysql:8.0
+    command:
+      - /usr/local/bin/init-docker-databases.sh
+    volumes:
+      - ../init-docker-databases.sh:/usr/local/bin/init-docker-databases.sh
+      - ../../../mpc-backend/sql/init-database.sql:/init-database.sql
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - mpc
+networks:
+  mpc:
+    driver: bridge
