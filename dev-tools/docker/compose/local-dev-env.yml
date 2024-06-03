@@ -6,8 +6,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ../mysql.conf.d:/etc/mysql/conf.d/
+      - ../mysql.conf.d/:/etc/mysql/conf.d/
       - ../../../mpc-backend/sql/:/docker-entrypoint-initdb.d/
+      - ../../../build/localStorage/mysql:/var/lib/mysql:Z
     environment:
       - MARIADB_ROOT_PASSWORD=123456
       - MARIADB_DATABASE=mpc
@@ -26,18 +27,6 @@ services:
     restart: always
     networks:
       - mpc
-#  init-db:
-#    image: mariadb:11.4-noble
-#    command:
-#      - /usr/local/bin/init-docker-databases.sh
-#    volumes:
-#      - ../init-docker-databases.sh:/usr/local/bin/init-docker-databases.sh
-#      - ../../../mpc-backend/sql/init-database.sql:/init-database.sql
-#    depends_on:
-#      mpc-db:
-#        condition: service_healthy
-#    networks:
-#      - mpc
   mpc-zk:
     image: zookeeper:3.7.2
     restart: always
