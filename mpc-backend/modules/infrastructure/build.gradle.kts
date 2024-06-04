@@ -1,3 +1,5 @@
+import com.nevermore.mpc.buildx.officialStarter
+
 plugins {
     id("mpc-build.spring-boot-library")
     id("mpc-build.kotlin-common")
@@ -23,6 +25,8 @@ dependencies {
 
     testImplementation(libs.mybatisPlusTestStarter)
     runtimeOnly(libs.h2)
+
+    implementation(officialStarter("webflux"))
 
     implementation(libs.curatorRecipes)
     testImplementation(libs.curatorTest)
