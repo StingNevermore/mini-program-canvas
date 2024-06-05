@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 import static com.nevermore.mpc.tests.utils.ZkTestingClusterTestsBase.getCurator;
 import static com.nevermore.mpc.tests.utils.ZkTestingClusterTestsBase.setupTestingCluster;
 import static com.nevermore.mpc.tests.utils.ZkTestingClusterTestsBase.tearDownTestingCluster;
-import static java.lang.Thread.sleep;
+import static com.nevermore.mpc.tests.utils.ZkTestingClusterTestsBase.waitZkSync;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -69,14 +69,14 @@ public class CuratorFrameworkTests {
         }
 
         getCurator().setData().forPath(path, "world".getBytes());
-        sleep(1000);
+        waitZkSync();
 
         Optional<ChildData> childData = cache.get(path);
         assertTrue(childData.isPresent());
         assertEquals("world", new String(childData.get().getData()));
 
         getCurator().delete().forPath(path);
-        sleep(2000);
+        waitZkSync();
 
 
         if (!holder.result) {

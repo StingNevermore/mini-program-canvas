@@ -9,8 +9,13 @@ import org.apache.curator.test.TestingCluster;
 
 import java.io.Closeable;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static java.lang.Thread.sleep;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * @author nevermore
@@ -21,19 +26,16 @@ public class ZkTestingClusterTestsBase {
     private static TestingCluster cluster;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void setupTestingCluster() throws Exception {
-        int n = 3;
-
-        List<InstanceSpec> specs = new ArrayList<>(3);
-        for (int i = 0; i < n; i++) {
-            File tempDirectory = new File("build/zookeeper/" + i);
+    public static void setupTestingCluster(Collection<Integer> ports) throws Exception {
+        Set<InstanceSpec> specs = ports.stream().map(port -> {
+            File tempDirectory = new File("build/zookeeper/" + port);
             if (!tempDirectory.exists()) {
                 tempDirectory.mkdirs();
             }
-            InstanceSpec spec = new InstanceSpec(tempDirectory,
-                    -1, -1, -1, true, -1);
-            specs.add(spec);
-        }
+            return new InstanceSpec(tempDirectory,
+                    port, -1, -1, true, -1);
+
+        }).collect(toSet());
 
         TestingCluster cluster = new TestingCluster(specs);
         cluster.start();
@@ -43,6 +45,11 @@ public class ZkTestingClusterTestsBase {
 
         ZkTestingClusterTestsBase.curator = curator;
         ZkTestingClusterTestsBase.cluster = cluster;
+    }
+
+    public static void setupTestingCluster() throws Exception {
+        List<Integer> negativePorts = Stream.generate(() -> -1).limit(3).toList();
+        setupTestingCluster(negativePorts);
     }
 
     public static void tearDownTestingCluster() throws Exception {
@@ -57,6 +64,14 @@ public class ZkTestingClusterTestsBase {
 
     public static TestingCluster getCluster() {
         return cluster;
+    }
+
+    public static void waitZkSync() {
+        try {
+            sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     private static void cleanup() {

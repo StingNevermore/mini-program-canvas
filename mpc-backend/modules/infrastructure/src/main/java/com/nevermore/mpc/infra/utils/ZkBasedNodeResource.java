@@ -58,6 +58,7 @@ public class ZkBasedNodeResource<T> implements Closeable {
             synchronized (lock) {
                 if (resource == null) {
                     cache = CuratorCache.build(curatorFactory.get(), path);
+                    cache.start();
                     Stat stat;
                     byte[] data;
                     try {
