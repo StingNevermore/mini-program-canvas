@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static java.lang.Thread.sleep;
@@ -27,8 +28,14 @@ public class ZkTestingClusterTestsBase {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void setupTestingCluster(Collection<Integer> ports) throws Exception {
+        AtomicInteger indexer = new AtomicInteger();
         Set<InstanceSpec> specs = ports.stream().map(port -> {
-            File tempDirectory = new File("build/zookeeper/" + port);
+            int dirIndex = port;
+            if (port == -1) {
+                dirIndex = indexer.getAndIncrement();
+            }
+
+            File tempDirectory = new File("build/zookeeper/" + dirIndex);
             if (!tempDirectory.exists()) {
                 tempDirectory.mkdirs();
             }
