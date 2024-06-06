@@ -14,6 +14,7 @@ plugins {
 }
 
 dependencies {
+    implementation(platform(fromVersionCatalog("springCloudDependencies")))
     implementation(platform(fromVersionCatalog("springBootDependencies")))
     annotationProcessor(platform(fromVersionCatalog("springBootDependencies")))
     developmentOnly(platform(fromVersionCatalog("springBootDependencies")))

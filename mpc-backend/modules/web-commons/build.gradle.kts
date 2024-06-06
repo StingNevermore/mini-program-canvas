@@ -8,7 +8,6 @@ plugins {
 dependencies {
     implementation(project(":infrastructure"))
     implementation(project(":components"))
-    implementation(project(":web-commons"))
 
     implementation(officialStarter("validation"))
 }

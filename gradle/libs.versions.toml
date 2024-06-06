@@ -20,9 +20,11 @@ changelog = "2.2.0"
 gradleIntelliJPlugin = "1.17.2"
 qodana = "2023.3.1"
 kover = "0.7.6"
+springCloud = "2023.0.1"
 
 [libraries]
 springBootDependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
+springCloudDependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 
 kotlinxCoroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx" }
 

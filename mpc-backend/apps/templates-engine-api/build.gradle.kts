@@ -1,3 +1,5 @@
+import com.nevermore.mpc.buildx.officialStarter
+
 plugins {
     id("mpc-build.spring-boot-api")
     id("mpc-build.kotlin-common")
@@ -6,5 +8,7 @@ plugins {
 dependencies {
     implementation(project(":infrastructure"))
     implementation(project(":components"))
+    implementation(project(":web-commons"))
 
+    implementation(officialStarter("validation"))
 }
