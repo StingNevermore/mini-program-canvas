@@ -30,9 +30,8 @@ public class ZkBasedNodeResource<T> implements Closeable {
     private volatile T resource;
     private volatile boolean closed = false;
     private volatile boolean emptyLogged = false;
-    private volatile boolean hasAddedListener = false;
     private final AtomicBoolean outdated = new AtomicBoolean(false);
-    private CuratorCache cache;
+    private final CuratorCache cache;
 
     private final String path;
     private final Supplier<T> defaultResourceSupplier;
@@ -46,6 +45,10 @@ public class ZkBasedNodeResource<T> implements Closeable {
         this.deserializer = builder.deserializer;
         this.curatorFactory = builder.curatorFactory;
         this.onResourceChangedListener = builder.onResourceChangedListener;
+
+        cache = CuratorCache.build(curatorFactory.get(), path);
+        cache.start();
+        tryAddListener();
     }
 
     public static <E> Builder<E> newBuilder(String path) {
@@ -57,8 +60,6 @@ public class ZkBasedNodeResource<T> implements Closeable {
         if (resource == null) {
             synchronized (lock) {
                 if (resource == null) {
-                    cache = CuratorCache.build(curatorFactory.get(), path);
-                    cache.start();
                     Stat stat;
                     byte[] data;
                     try {
@@ -75,7 +76,6 @@ public class ZkBasedNodeResource<T> implements Closeable {
                     } catch (Exception e) {
                         throw new IllegalStateException(e);
                     }
-                    tryAddListener();
                     try {
                         resource = deserializer.apply(data, stat);
                     } catch (Exception e) {
@@ -110,16 +110,13 @@ public class ZkBasedNodeResource<T> implements Closeable {
     }
 
     private void tryAddListener() {
-        if (!hasAddedListener) {
-            CuratorCacheListener listener = CuratorCacheListener.builder()
-                    .forCreates(childData -> handle(emptyChildData(), childData))
-                    .forChanges(this::handle)
-                    .forDeletes(oldData -> handle(oldData, emptyChildData()))
-                    .build();
-            cache.listenable().addListener(listener);
-        }
+        CuratorCacheListener listener = CuratorCacheListener.builder()
+                .forCreates(childData -> handle(emptyChildData(), childData))
+                .forChanges(this::handle)
+                .forDeletes(oldData -> handle(oldData, emptyChildData()))
+                .build();
+        cache.listenable().addListener(listener);
 
-        hasAddedListener = true;
     }
 
     private void handle(ChildData oldData, ChildData newData) {
