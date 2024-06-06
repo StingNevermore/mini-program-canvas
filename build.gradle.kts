@@ -70,4 +70,5 @@ tasks.getByName<Delete>("clean") {
 
 tasks.register<Delete>("cleanLocalStorage") {
     delete = setOf(layout.buildDirectory.dir("localStorage"))
+    dependsOn("shutdownLocalDockerComposeDevEnv")
 }
