@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nevermore.mpc.components.dao.TenantDAO">
+    <insert id="insert">
+        insert into tenant (tenant_id, tenant_name)
+        VALUES (#{tenantId}, #{tenantName})
+    </insert>
+
+    <select id="select" parameterType="collection" resultType="com.nevermore.mpc.components.models.Tenant">
+        select * from tenant where tenant_id in
+        <foreach collection="tenantIds" open="(" close=")" separator="," item="tenantId">
+            #{tenantId}
+        </foreach>
+    </select>
+</mapper>

@@ -13,6 +13,7 @@ guava = "33.1.0-jre"
 jackson = "2.16.2"
 curator = "5.6.0"
 commonsIo = "2.16.1"
+commonsLang3 = "3.14.0"
 # libraries
 annotations = "24.1.0"
 # plugins
@@ -21,6 +22,8 @@ gradleIntelliJPlugin = "1.17.2"
 qodana = "2023.3.1"
 kover = "0.7.6"
 springCloud = "2023.0.1"
+testContainersMariaDB = "1.19.8"
+mariaDBDriver = "3.4.0"
 
 [libraries]
 springBootDependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
@@ -50,6 +53,7 @@ curatorRecipes = { group = "org.apache.curator", name = "curator-recipes", versi
 curatorTest = { group = "org.apache.curator", name = "curator-test", version.ref = "curator" }
 
 commonsIo = { group = "commons-io", name = "commons-io", version.ref = "commonsIo" }
+commonsLang3 = { group = "org.apache.commons", name = "commons-lang3", version.ref = "commonsLang3" }
 
 junitJupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 junitPlatformLauncher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatformLauncher" }
@@ -60,6 +64,9 @@ kotlinSpringPlugin = { group = "org.jetbrains.kotlin.plugin.spring", name = "org
 springBootPlugin = { group = "org.springframework.boot", name = "org.springframework.boot.gradle.plugin", version.ref = "spring-boot" }
 
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
+
+testContainersMariaDB = { group = "org.testcontainers", name = "mariadb", version.ref = "testContainersMariaDB" }
+mariaDBDriver = { group = "org.mariadb.jdbc", name = "mariadb-java-client", version.ref = "mariaDBDriver" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }

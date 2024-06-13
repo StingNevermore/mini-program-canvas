@@ -3,7 +3,6 @@
 import com.nevermore.mpc.buildx.configureTestingFramework
 import com.nevermore.mpc.buildx.fromVersionCatalog
 import com.nevermore.mpc.buildx.officialStarter
-import com.nevermore.mpc.buildx.springBoot
 
 
 plugins {
@@ -19,10 +18,10 @@ dependencies {
     annotationProcessor(platform(fromVersionCatalog("springBootDependencies")))
     developmentOnly(platform(fromVersionCatalog("springBootDependencies")))
 
-    implementation(springBoot("spring-boot-starter"))
+    implementation(com.nevermore.mpc.buildx.springBoot("spring-boot-starter"))
 
-    developmentOnly(springBoot("spring-boot-devtools"))
-    annotationProcessor(springBoot("spring-boot-configuration-processor"))
+    developmentOnly(com.nevermore.mpc.buildx.springBoot("spring-boot-devtools"))
+    annotationProcessor(com.nevermore.mpc.buildx.springBoot("spring-boot-configuration-processor"))
     testImplementation(officialStarter("test"))
 }
 

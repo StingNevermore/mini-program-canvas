@@ -3,6 +3,7 @@ import com.nevermore.mpc.buildx.officialStarter
 plugins {
     id("mpc-build.spring-boot-library")
     id("mpc-build.kotlin-common")
+    `java-test-fixtures`
 }
 
 dependencies {
@@ -22,9 +23,14 @@ dependencies {
     implementation(libs.mybatisPlusStarter)
     implementation(libs.mybatisSpring)
     implementation(libs.commonsIo)
+    implementation(libs.commonsLang3)
 
-    testImplementation(libs.mybatisPlusTestStarter)
-    runtimeOnly(libs.h2)
+
+    testFixturesApi(libs.mybatisPlusTestStarter)
+//    runtimeOnly(libs.h2)
+    testFixturesApi(libs.testContainersMariaDB)
+    testFixturesApi(libs.mariaDBDriver)
+    testFixturesImplementation(officialStarter("test"))
 
     implementation(officialStarter("webflux"))
 
