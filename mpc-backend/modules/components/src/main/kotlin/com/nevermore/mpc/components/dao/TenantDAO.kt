@@ -13,4 +13,6 @@ interface TenantDAO {
     fun insert(tenantId: String, tenantName: String): Int
 
     fun select(tenantIds: Collection<String>): List<Tenant>
+
+    fun update(tenantId: String, locked: Int): Int
 }

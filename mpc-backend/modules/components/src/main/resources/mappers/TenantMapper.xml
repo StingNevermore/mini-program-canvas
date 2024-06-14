@@ -5,7 +5,7 @@
 <mapper namespace="com.nevermore.mpc.components.dao.TenantDAO">
     <insert id="insert">
         insert into tenant (tenant_id, tenant_name)
-        VALUES (#{tenantId}, #{tenantName})
+        values (#{tenantId}, #{tenantName})
     </insert>
 
     <select id="select" parameterType="collection" resultType="com.nevermore.mpc.components.models.Tenant">
@@ -14,4 +14,10 @@
             #{tenantId}
         </foreach>
     </select>
+
+    <update id="update">
+        update tenant
+        set locked = #{locked}
+        where tenant_id = #{tenantId}
+    </update>
 </mapper>

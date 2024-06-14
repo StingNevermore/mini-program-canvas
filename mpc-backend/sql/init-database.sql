@@ -2,6 +2,7 @@ create table `tenant`
 (
     `tenant_id`   varchar(10)  not null comment '租户ID',
     `tenant_name` varchar(254) not null comment '租户名称',
+    `locked`      bool         not null default '0' comment '锁定',
     primary key (`tenant_id`)
 ) engine = InnoDB
   default charset = utf8mb4
