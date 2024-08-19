@@ -62,7 +62,7 @@
     "@logicflow/extension": "^1.2.26",
     "@mpc-frontend/hooks": "workspace:*",
     "@vue/shared": "^3.4.25",
-    "@vueuse/core": "^10.9.0",
+    "@vueuse/core": "^11.0.1",
     "@zxcvbn-ts/core": "^3.0.4",
     "ant-design-vue": "^4.2.1",
     "axios": "^1.6.8",
